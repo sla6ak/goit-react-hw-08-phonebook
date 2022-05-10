@@ -8,6 +8,7 @@ export const DeletedPerson = styled.button`
   align-items: center;
   padding: 10px;
   border-radius: 5px;
+  border-color: #d68686;
   :hover {
     background-color: #a70303;
     color: #ffffff;

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Header = styled.header`
-  background-color: #68ac84;
+  background-color: #759ab6;
   display: flex;
   min-height: 50px;
   align-items: center;
@@ -18,7 +18,7 @@ export const Footer = styled.footer`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: #68ac84;
+  background-color: #759ab6;
   min-height: 44px;
 `;
 
@@ -27,5 +27,5 @@ export const Main = styled.main`
   flex-direction: column;
   flex-grow: 2;
   width: 100%;
-  background-color: #c0ccbb;
+  background-color: #bbcccc;
 `;

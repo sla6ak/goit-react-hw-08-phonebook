@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
-import { DataPerson, FormPerson, Sabmit, Label } from './Form.styled';
+import { FormPerson } from './Form.styled';
+import Grid from '@mui/material/Grid';
 import propTypes from 'prop-types';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 // import { useAddContactMutation } from 'server/fetchContacts';
 
@@ -56,29 +59,39 @@ export const Form = () => {
 
   return (
     <FormPerson action="" onSubmit={formSubmit}>
-      <Label htmlFor={idName}>enter name</Label>
-      <DataPerson
-        id={idName}
-        type="text"
-        name="name"
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        required
-        onChange={onCangeInpute}
-        value={name}
-      />
-      <Label htmlFor={idTel}>enter telephone</Label>
-      <DataPerson
-        id={idTel}
-        type="tel"
-        name="number"
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        required
-        value={number}
-        onChange={onCangeInpute}
-      />
-      <Sabmit type="submit">Save</Sabmit>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TextField
+            label="Name"
+            id={idName}
+            type="text"
+            name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+            fullWidth
+            onChange={onCangeInpute}
+            value={name}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Telephon"
+            id={idTel}
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={number}
+            onChange={onCangeInpute}
+          />
+        </Grid>
+      </Grid>
+      <Button variant="contained" fullWidth sx={{ mt: 3, mb: 2 }} type="submit">
+        Save
+      </Button>
     </FormPerson>
   );
 };

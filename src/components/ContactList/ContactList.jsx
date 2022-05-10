@@ -1,4 +1,4 @@
-import { ListPersons } from './ContactList.styled';
+import { ListPersons, BoxPersons } from './ContactList.styled';
 import React from 'react';
 import Filter from 'components/Filter/Filter';
 import Contact from 'components/Contact/Contact';
@@ -17,14 +17,14 @@ const ContactList = ({ contacts }) => {
   const nameContacts = findeByName();
 
   return (
-    <>
+    <BoxPersons>
       <Filter />
       <ListPersons>
         {nameContacts.map(el => (
           <Contact key={el.id} elem={el} />
         ))}
       </ListPersons>
-    </>
+    </BoxPersons>
   );
 };
 

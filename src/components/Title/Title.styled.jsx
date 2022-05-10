@@ -7,6 +7,7 @@ export const TitleSection = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
 `;

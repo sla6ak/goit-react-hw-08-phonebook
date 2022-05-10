@@ -37,7 +37,7 @@ const LoginPage = () => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: '#759ab6' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
