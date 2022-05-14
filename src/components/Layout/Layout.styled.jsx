@@ -27,5 +27,6 @@ export const Main = styled.main`
   flex-direction: column;
   flex-grow: 2;
   width: 100%;
-  background-color: #bbcccc;
+  background-color: rgb(237, 245, 244);
+  /* background-color: #bbcccc; */
 `;

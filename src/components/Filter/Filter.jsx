@@ -15,6 +15,7 @@ const Filter = () => {
 
   return (
     <TextField
+      label="Find contact"
       type="text"
       name="filter"
       value={filter}

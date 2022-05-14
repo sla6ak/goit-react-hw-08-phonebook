@@ -9,7 +9,6 @@ export const GlobalStyled = () => {
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
             Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
           color: #212121;
-          background-color: rgb(151, 151, 151);
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
