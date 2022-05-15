@@ -12,14 +12,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { newToken } from 'redux/sliceToken';
 import { useLoginUserMutation } from 'server/login';
+import { linkActiv } from 'components/utilits/linkActiv';
 
 // const theme = createTheme();
 
 const LoginPage = () => {
-  const token = useSelector(state => state.token);
   const dispatch = useDispatch();
   const [createUser, { error: errorCreate, isLoading: loadingCreate }] =
     useLoginUserMutation();
@@ -88,7 +88,9 @@ const LoginPage = () => {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <NavLink to="/register">"Don't have an account? Sign Up"</NavLink>
+              <NavLink style={linkActiv} to="/register">
+                "Don't have an account? Sign Up"
+              </NavLink>
             </Grid>
           </Grid>
         </Box>

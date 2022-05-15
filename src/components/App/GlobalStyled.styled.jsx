@@ -37,6 +37,9 @@ export const GlobalStyled = () => {
           flex-direction: column;
           min-height: 100vh;
         }
+        .date {
+          font-weight: 600;
+        }
       `}
     />
   );

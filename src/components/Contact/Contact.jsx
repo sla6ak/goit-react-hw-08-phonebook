@@ -1,12 +1,11 @@
 import { Person, DeletedPerson } from './Contact.styled';
 import propTypes from 'prop-types';
 
-// import { useDeletedContactMutation } from 'server/fetchContacts';
+import { useDeletedContactMutation } from 'server/contacts';
 import NotContacts from 'components/NotContacts/NotContacts';
 
 const Contact = ({ elem }) => {
-  // const [deleted, { isLoading: isDeleted }] = useDeletedContactMutation(); //после делетед мы можем принимать опции удаления если нужно. [ a, {} ]
-  const isDeleted = false;
+  const [deleted, { isLoading: isDeleted }] = useDeletedContactMutation(); //после делетед мы можем принимать опции удаления если нужно. [ a, {} ]
   return (
     <>
       {isDeleted ? (
@@ -14,7 +13,11 @@ const Contact = ({ elem }) => {
       ) : (
         <Person>
           {elem.name} : {elem.number}
-          <DeletedPerson onClick={() => {}}>
+          <DeletedPerson
+            onClick={() => {
+              deleted(elem.id);
+            }}
+          >
             <div>Delete</div>
           </DeletedPerson>
         </Person>

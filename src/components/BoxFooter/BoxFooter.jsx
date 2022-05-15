@@ -18,7 +18,7 @@ export function BoxFooter(props) {
 
   return (
     <DataNew>
-      Made in_<b>Kriviy Rig</b>_ Data today : {date}
+      Made in Kriviy Rig _ Data today : <div className="date">{date}</div>
     </DataNew>
   );
 }

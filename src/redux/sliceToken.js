@@ -7,9 +7,9 @@ export const curentToken = createSlice({
   initialState: initialToken,
   reducers: {
     newToken(_state, action) {
-      if (!action.payload) {
-        return;
-      }
+      // if (!action.payload) {
+      //   return;
+      // }
       return action.payload;
     },
   },

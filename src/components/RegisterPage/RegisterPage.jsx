@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -12,11 +10,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
 import { useRegistrationUserMutation } from 'server/login';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { newToken } from 'redux/sliceToken';
+import { linkActiv } from 'components/utilits/linkActiv';
 
 const RegisterPage = () => {
-  const token = useSelector(state => state.token);
   const dispatch = useDispatch();
   const [createUser, { error: errorCreate, isLoading: loadingCreate }] =
     useRegistrationUserMutation();
@@ -85,12 +83,6 @@ const RegisterPage = () => {
                 autoComplete="new-password"
               />
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
           </Grid>
           <Button
             type="submit"
@@ -102,7 +94,9 @@ const RegisterPage = () => {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <NavLink to="/login">Already have an account? Sign in</NavLink>
+              <NavLink style={linkActiv} to="/login">
+                Already have an account? Sign in
+              </NavLink>
             </Grid>
           </Grid>
         </Box>
