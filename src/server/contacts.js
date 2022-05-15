@@ -5,35 +5,42 @@ export const contactApi = createApi({
   reducerPath: 'contactApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://connections-api.herokuapp.com',
+    //тут я создаю базовый хедерс для всех запросов вытягивая токен из стейта на любой глубине.
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().token;
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
-  tagTypes: ['Contact'],
+  tagTypes: ['contact'],
+
   endpoints: builder => ({
     getAllContacts: builder.query({
-      query: token => ({
+      query: () => ({
         url: `/contacts/`,
         method: 'GET',
-        header: `${token}`,
       }),
-      providesTags: ['Contact'], //тут мы создаем провайдер с ключем за которым необходимо следить
+      providesTags: ['contact'], //тут мы создаем провайдер с ключем за которым необходимо следить
     }),
 
     deletedContact: builder.mutation({
-      query: (token, id) => ({
+      query: id => ({
         url: `contacts/${id}`,
         method: 'DELETE',
-        header: `${token}`,
       }),
-      invalidatesTags: ['Contact'], // тут мы следим за ключем (эти ключи к кешу где нужно перефечивать данные)
+      invalidatesTags: ['contact'], // тут мы следим за ключем (эти ключи к кешу где нужно перефечивать данные)
     }),
 
     addContact: builder.mutation({
-      query: (token, newContact) => ({
+      query: newContact => ({
         url: `/contacts`,
         method: 'POST',
         body: newContact,
-        header: `${token}`,
       }),
-      invalidatesTags: ['Contact'],
+      invalidatesTags: ['contact'],
     }),
     //     {
     //   "name": "Jacob Mercer",

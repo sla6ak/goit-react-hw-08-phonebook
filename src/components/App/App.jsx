@@ -11,7 +11,7 @@ const LoginPage = lazy(() => import('../LoginPage/LoginPage'));
 
 export const App = () => {
   const token = useSelector(state => state.token);
-  console.log(token);
+  // console.log(token);
   const dispatch = useDispatch();
 
   // useEffect(() => {

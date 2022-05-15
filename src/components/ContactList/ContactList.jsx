@@ -1,8 +1,8 @@
 import { ListPersons, BoxPersons } from './ContactList.styled';
-import React from 'react';
 import Filter from 'components/Filter/Filter';
 import Contact from 'components/Contact/Contact';
 import { useSelector } from 'react-redux';
+import NotContacts from 'components/NotContacts/NotContacts';
 
 const ContactList = ({ contacts }) => {
   const filter = useSelector(state => state.filter);
@@ -14,16 +14,20 @@ const ContactList = ({ contacts }) => {
     );
   };
 
-  const nameContacts = findeByName();
+  let nameContacts = findeByName();
 
   return (
     <BoxPersons>
       <Filter />
-      <ListPersons>
-        {nameContacts.map(el => (
-          <Contact key={el.id} elem={el} />
-        ))}
-      </ListPersons>
+      {contacts.length > 0 ? (
+        <ListPersons>
+          {nameContacts.map(el => (
+            <Contact key={el.id} elem={el} />
+          ))}
+        </ListPersons>
+      ) : (
+        <NotContacts text={'List empty now'} />
+      )}
     </BoxPersons>
   );
 };

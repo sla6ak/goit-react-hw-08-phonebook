@@ -37,7 +37,7 @@ export const loginUserApi = createApi({
       query: token => ({
         url: `/users/login`,
         method: 'POST',
-        header: `${token}`,
+        headers: { Authorization: `Bearer ${token}` },
       }),
       invalidatesTags: ['User'],
     }),

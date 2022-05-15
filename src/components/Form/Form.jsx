@@ -6,27 +6,12 @@ import propTypes from 'prop-types';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-// import { useAddContactMutation } from 'server/fetchContacts';
+import { useAddContactMutation } from 'server/contacts';
 
 export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  // const [updatePost] = useAddContactMutation()
-
-  // цикл первой загрузки компонента
-  useEffect(() => {
-    const lwrite = localStorage.getItem('write');
-    if (lwrite) {
-      const write = JSON.parse(lwrite);
-      setName(write.name);
-      setNumber(write.number);
-    }
-  }, []);
-
-  // после обновления стейта сохраним локально вводимые значения
-  useEffect(() => {
-    localStorage.setItem('write', JSON.stringify({ name, number }));
-  }, [name, number]);
+  const [updatePost, { error, isLoading }] = useAddContactMutation();
 
   //генерируем необходимые ключи
   const idName = nanoid();
@@ -45,7 +30,7 @@ export const Form = () => {
   //внутрений метод сабмита обрабатывающий событие
   const formSubmit = event => {
     event.preventDefault();
-    // updatePost({ name, number });
+    updatePost({ name, number });
     reset();
   };
 
