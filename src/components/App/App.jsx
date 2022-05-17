@@ -8,6 +8,7 @@ import { useGetIsActivUserQuery } from 'server/login';
 import { isAuth } from 'redux/sliceAuth';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import PublicRoute from 'components/PublicRoute/PublicRoute';
+import { Navigate } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 
@@ -37,6 +38,8 @@ export const App = () => {
       <GlobalStyled />
       <ToastContainer autoClose={3000} />
       <Routes>
+        {/* строка ниже это ридерект на добропожаловать(заготовленую страницу) */}
+        <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<Layout auth={curentAuth} />}>
           <Route
             path="/contacts"
