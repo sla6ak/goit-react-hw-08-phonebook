@@ -10,7 +10,7 @@ import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import PublicRoute from 'components/PublicRoute/PublicRoute';
 import { Navigate } from 'react-router-dom';
 
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ContactsPage = lazy(() => import('../ContactsPage/ContactsPage'));
 const RegisterPage = lazy(() => import('../RegisterPage/RegisterPage'));
@@ -33,10 +33,15 @@ export const App = () => {
     dispatch(isAuth(auth.name)); //при монтировании компонентов проверяем подлинность токена.
   }, [auth, dispatch, token]);
 
+  const tosty = () => {
+    toast.error('Error login try again');
+  };
+
   return (
     <>
       <GlobalStyled />
       <ToastContainer autoClose={3000} />
+      {error && tosty()}
       <Routes>
         {/* строка ниже это ридерект на добропожаловать(заготовленую страницу) */}
         <Route path="*" element={<Navigate to="/" />} />

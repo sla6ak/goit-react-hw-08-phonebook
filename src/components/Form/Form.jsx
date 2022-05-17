@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { FormPerson } from './Form.styled';
 import Grid from '@mui/material/Grid';
@@ -7,11 +7,12 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import { useAddContactMutation } from 'server/contacts';
+import { toast } from 'react-toastify';
 
 export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [updatePost, { error, isLoading }] = useAddContactMutation();
+  const [updatePost, { isError }] = useAddContactMutation();
 
   //генерируем необходимые ключи
   const idName = nanoid();
@@ -41,9 +42,13 @@ export const Form = () => {
     // тут же нам необходимо очистить локалку чтоб вводимые ранее значения не всплыли вновь
     localStorage.removeItem('write');
   };
+  const tosty = () => {
+    toast.error('Error add');
+  };
 
   return (
     <FormPerson action="" onSubmit={formSubmit}>
+      {isError && tosty()}
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
