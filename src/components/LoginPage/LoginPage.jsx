@@ -25,7 +25,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const [createUser, { isError }] = useLoginUserMutation();
   const tosty = () => {
-    toast.error('Error Registration');
+    toast.error('Error login');
   };
 
   const handleSubmit = async event => {
