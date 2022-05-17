@@ -9,6 +9,8 @@ import { isAuth } from 'redux/sliceAuth';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import PublicRoute from 'components/PublicRoute/PublicRoute';
 
+import { ToastContainer } from 'react-toastify';
+
 const ContactsPage = lazy(() => import('../ContactsPage/ContactsPage'));
 const RegisterPage = lazy(() => import('../RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('../LoginPage/LoginPage'));
@@ -33,6 +35,7 @@ export const App = () => {
   return (
     <>
       <GlobalStyled />
+      <ToastContainer autoClose={3000} />
       <Routes>
         <Route path="/" element={<Layout auth={curentAuth} />}>
           <Route

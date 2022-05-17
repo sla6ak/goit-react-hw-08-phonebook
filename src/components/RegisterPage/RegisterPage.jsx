@@ -14,10 +14,15 @@ import { useDispatch } from 'react-redux';
 import { newToken } from 'redux/sliceToken';
 import { linkActiv } from 'components/utilits/linkActiv';
 
+import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+
 const RegisterPage = () => {
   const dispatch = useDispatch();
-  const [createUser, { error: errorCreate, isLoading: loadingCreate }] =
-    useRegistrationUserMutation();
+  const [createUser, { isError }] = useRegistrationUserMutation();
+  const tosty = () => {
+    toast.error('Error login');
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -28,11 +33,14 @@ const RegisterPage = () => {
       password: data.get('password'),
     };
     const responsToken = await createUser(send);
-    dispatch(newToken(responsToken.data.token));
+    if (responsToken.data) {
+      dispatch(newToken(responsToken.data.token));
+    }
   };
 
   return (
     <Container component="main" maxWidth="xs">
+      {isError && tosty()}
       <CssBaseline />
       <Box
         sx={{

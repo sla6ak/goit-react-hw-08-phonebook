@@ -17,27 +17,34 @@ import { newToken } from 'redux/sliceToken';
 import { useLoginUserMutation } from 'server/login';
 import { linkActiv } from 'components/utilits/linkActiv';
 
-// const theme = createTheme();
+import { toast } from 'react-toastify';
+
+// import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
-  const [createUser, { error: errorCreate, isLoading: loadingCreate }] =
-    useLoginUserMutation();
+  const [createUser, { isError }] = useLoginUserMutation();
+  const tosty = () => {
+    toast.error('Error Registration');
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
     const send = {
       email: data.get('email'),
       password: data.get('password'),
     };
     const responsToken = await createUser(send);
-    dispatch(newToken(responsToken.data.token));
+    if (responsToken.data) {
+      dispatch(newToken(responsToken.data.token));
+    }
   };
 
   return (
-    // <ThemeProvider theme={theme}>
     <Container component="main" maxWidth="xs">
+      {isError && tosty()}
       <CssBaseline />
       <Box
         sx={{
@@ -96,7 +103,6 @@ const LoginPage = () => {
         </Box>
       </Box>
     </Container>
-    // </ThemeProvider>
   );
 };
 
