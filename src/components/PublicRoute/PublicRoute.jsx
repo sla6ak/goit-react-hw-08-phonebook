@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 function PublicRoute({ children }) {
   const curentAuth = useSelector(state => state.auth);
 
-  return curentAuth === '' ? children : <Navigate to="/contacts" />;
+  return curentAuth.length === 0 ? children : <Navigate to="/contacts" />;
 }
 
 export default PublicRoute;

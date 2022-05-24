@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { filterContacts } from './sliceFilter';
-import { loginUserApi } from 'server/login';
+// import { loginUserApi } from 'server/login';
 import { contactApi } from 'server/contacts';
 import { curentToken } from './sliceToken'; // root reduser для токена
 import { curentUser } from './sliceAuth'; // будет хранить имя актуального пользователя и предоставлять доступ к функционалу
@@ -27,7 +27,7 @@ const tokenPersistConfig = {
 };
 const rootReduser = combineReducers({
   [contactApi.reducerPath]: contactApi.reducer,
-  [loginUserApi.reducerPath]: loginUserApi.reducer,
+  // [loginUserApi.reducerPath]: loginUserApi.reducer,
   filter: filterContacts.reducer,
   token: curentToken.reducer,
   auth: curentUser.reducer,
@@ -42,9 +42,8 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    })
-      .concat(contactApi.middleware)
-      .concat(loginUserApi.middleware),
+    }).concat(contactApi.middleware),
+  // .concat(loginUserApi.middleware),
 });
 
 export const persistor = persistStore(store); // это параметры для обертки приложения в индексе

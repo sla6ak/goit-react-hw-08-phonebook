@@ -14,8 +14,9 @@ import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { newToken } from 'redux/sliceToken';
-import { useLoginUserMutation } from 'server/login';
+import { useLoginUserMutation } from 'server/contacts';
 import { linkActiv } from 'components/utilits/linkActiv';
+import { isAuth } from 'redux/sliceAuth';
 
 import { toast } from 'react-toastify';
 
@@ -39,6 +40,7 @@ const LoginPage = () => {
     const responsToken = await createUser(send);
     if (responsToken.data) {
       dispatch(newToken(responsToken.data.token));
+      dispatch(isAuth(responsToken.data.user.name));
     }
   };
 

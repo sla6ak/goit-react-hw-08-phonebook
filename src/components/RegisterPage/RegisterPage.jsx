@@ -9,10 +9,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { NavLink } from 'react-router-dom';
-import { useRegistrationUserMutation } from 'server/login';
+import { useRegistrationUserMutation } from 'server/contacts';
 import { useDispatch } from 'react-redux';
 import { newToken } from 'redux/sliceToken';
 import { linkActiv } from 'components/utilits/linkActiv';
+import { isAuth } from 'redux/sliceAuth';
 
 import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +22,7 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
   const [createUser, { isError }] = useRegistrationUserMutation();
   const tosty = () => {
-    toast.error('Error login');
+    toast.error('Error Registration');
   };
 
   const handleSubmit = async event => {
@@ -35,6 +36,7 @@ const RegisterPage = () => {
     const responsToken = await createUser(send);
     if (responsToken.data) {
       dispatch(newToken(responsToken.data.token));
+      dispatch(isAuth(responsToken.data.user.name));
     }
   };
 

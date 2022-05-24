@@ -1,4 +1,3 @@
-import React from 'react';
 import Title from 'components/Title/Title';
 import { Section } from './ContactsPage.style';
 import { Form } from 'components/Form/Form';
@@ -6,7 +5,7 @@ import ContactList from 'components/ContactList/ContactList';
 import { useGetAllContactsQuery } from 'server/contacts';
 import NotContacts from 'components/NotContacts/NotContacts';
 
-function ContactsPage(props) {
+function ContactsPage() {
   const { data: contacts, isLoading } = useGetAllContactsQuery();
 
   return (

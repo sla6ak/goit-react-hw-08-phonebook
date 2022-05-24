@@ -23,7 +23,7 @@ export const contactApi = createApi({
         url: `/contacts/`,
         method: 'GET',
       }),
-      providesTags: ['contact'], //тут мы создаем провайдер с ключем за которым необходимо следить
+      providesTags: ['contact'],
     }),
 
     deletedContact: builder.mutation({
@@ -31,7 +31,7 @@ export const contactApi = createApi({
         url: `contacts/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['contact'], // тут мы следим за ключем (эти ключи к кешу где нужно перефечивать данные)
+      invalidatesTags: ['contact'],
     }),
 
     addContact: builder.mutation({
@@ -41,6 +41,49 @@ export const contactApi = createApi({
         body: newContact,
       }),
       invalidatesTags: ['contact'],
+    }),
+    registrationUser: builder.mutation({
+      query: newUser => ({
+        url: '/users/signup',
+        method: 'POST',
+        body: newUser,
+      }),
+      invalidatesTags: ['contact', 'user'],
+    }),
+
+    //запрос получение нового токена для работы пользователя с бэкендом
+    //     {
+    //   "email": "string",
+    //   "password": "string"
+    // }
+    loginUser: builder.mutation({
+      query: userData => ({
+        url: `/users/login`,
+        method: 'POST',
+        body: userData,
+      }),
+      invalidatesTags: ['contact', 'user'],
+    }),
+
+    //запрос который удаляет актуальный токен выданый пользователю на бекенде
+    unLoginUser: builder.mutation({
+      query: () => ({
+        url: `/users/logout`,
+        method: 'POST',
+        // headers: { Authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ['user'],
+    }),
+
+    //запрос для проверки валидный ли токен храниться в памяти для последующих запросов на бэкенд
+    //отправляет только токен возвращает имя пользователя и эмеил
+    getIsActivUser: builder.query({
+      query: () => ({
+        url: `/users/current`,
+        method: 'GET',
+        // headers: { Authorization: `Bearer ${token}` },
+      }),
+      providesTags: ['user'],
     }),
     //     {
     //   "name": "Jacob Mercer",
@@ -55,4 +98,8 @@ export const {
   useGetAllContactsQuery,
   useDeletedContactMutation,
   useAddContactMutation,
+  useGetIsActivUserQuery,
+  useRegistrationUserMutation,
+  useLoginUserMutation,
+  useUnLoginUserMutation,
 } = contactApi;

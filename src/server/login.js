@@ -14,6 +14,7 @@ export const loginUserApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['user'],
   endpoints: builder => ({
     //запрос для регистрации нового пользователя ожидает тело в виде JSON объекта.
     //     {
@@ -27,6 +28,7 @@ export const loginUserApi = createApi({
         method: 'POST',
         body: newUser,
       }),
+      invalidatesTags: ['contact', 'user'],
     }),
 
     //запрос получение нового токена для работы пользователя с бэкендом
@@ -40,16 +42,17 @@ export const loginUserApi = createApi({
         method: 'POST',
         body: userData,
       }),
+      invalidatesTags: ['user'],
     }),
 
     //запрос который удаляет актуальный токен выданый пользователю на бекенде
     unLoginUser: builder.mutation({
       query: () => ({
-        url: `/users/login`,
+        url: `/users/logout`,
         method: 'POST',
         // headers: { Authorization: `Bearer ${token}` },
       }),
-      providesTags: ['User'],
+      invalidatesTags: ['user'],
     }),
 
     //запрос для проверки валидный ли токен храниться в памяти для последующих запросов на бэкенд
@@ -60,7 +63,7 @@ export const loginUserApi = createApi({
         method: 'GET',
         // headers: { Authorization: `Bearer ${token}` },
       }),
-      providesTags: ['User'],
+      providesTags: ['user'],
     }),
   }),
 });

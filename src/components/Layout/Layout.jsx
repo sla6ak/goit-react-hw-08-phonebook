@@ -7,10 +7,11 @@ import { Suspense } from 'react';
 import { Unlogin } from 'components/UnLogin/Unlogin';
 import { linkActiv } from '../utilits/linkActiv';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export function Layout({ auth }) {
+export function Layout() {
+  const auth = useSelector(state => state.auth);
   const location = useLocation();
-  if (location.pathname === '/');
   return (
     <>
       <Header>
@@ -23,7 +24,7 @@ export function Layout({ auth }) {
             ) : (
               <div></div>
             )}
-            {auth === '' ? <Login /> : <Unlogin>UnLogin</Unlogin>}
+            {auth === '' ? <Login /> : <Unlogin auth={auth}>UnLogin</Unlogin>}
           </BoxHeader>
         </Conteiner>
       </Header>
