@@ -30,7 +30,7 @@ export function Layout() {
       </Header>
       <Main>
         <Conteiner>
-          <Suspense>
+          <Suspense fallback={<h1>Loading...</h1>}>
             <Outlet />
           </Suspense>
         </Conteiner>
