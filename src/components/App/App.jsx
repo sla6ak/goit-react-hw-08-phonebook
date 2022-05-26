@@ -39,8 +39,9 @@ export const App = () => {
       {error && tosty()}
       <Routes>
         {/* строка ниже это ридерект на добропожаловать(заготовленую страницу) */}
-        <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<Layout />}>
+          {/* индекс это как будто чилдрены базовой страницы которые рендерятся только на базовом роуте */}
+          <Route index element={<h1 style={{ margin: '50px' }}>Welcome!</h1>} />
           <Route
             path="/contacts"
             element={
@@ -66,6 +67,7 @@ export const App = () => {
             }
           />
         </Route>
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );

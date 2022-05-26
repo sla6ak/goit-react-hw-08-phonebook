@@ -6,12 +6,12 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Unlogin } from 'components/UnLogin/Unlogin';
 import { linkActiv } from '../utilits/linkActiv';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export function Layout() {
   const auth = useSelector(state => state.auth);
-  const location = useLocation();
+  // const location = useLocation();
   return (
     <>
       <Header>
@@ -30,13 +30,9 @@ export function Layout() {
       </Header>
       <Main>
         <Conteiner>
-          {location.pathname === '/' ? (
-            <h1 style={{ margin: '50px' }}>Welcome!</h1>
-          ) : (
-            <Suspense>
-              <Outlet />
-            </Suspense>
-          )}
+          <Suspense>
+            <Outlet />
+          </Suspense>
         </Conteiner>
       </Main>
       <Footer>

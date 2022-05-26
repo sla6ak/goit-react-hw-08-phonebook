@@ -5,7 +5,9 @@ export const contactApi = createApi({
   reducerPath: 'contactApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://connections-api.herokuapp.com',
+
     //тут я создаю базовый хедерс для всех запросов вытягивая токен из стейта на любой глубине.
+
     prepareHeaders: (headers, { getState }) => {
       const token = getState().token;
       // If we have a token set in state, let's assume that we should be passing it.
@@ -77,6 +79,7 @@ export const contactApi = createApi({
 
     //запрос для проверки валидный ли токен храниться в памяти для последующих запросов на бэкенд
     //отправляет только токен возвращает имя пользователя и эмеил
+
     getIsActivUser: builder.query({
       query: () => ({
         url: `/users/current`,

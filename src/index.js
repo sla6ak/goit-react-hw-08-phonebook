@@ -20,4 +20,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>
 );
-// basename="/goit-react-hw-08-phonebook/"
+// basename="/goit-react-hw-08-phonebook/" всегда со слешами с обеих сторон!
